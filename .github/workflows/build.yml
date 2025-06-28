@@ -1,4 +1,4 @@
-name: Build UmaAi
+name: Build UmaAiForm Only
 
 on:
   push:
@@ -14,14 +14,13 @@ jobs:
       - name: Set up MSBuild
         uses: microsoft/setup-msbuild@v1.3.1
 
-      - name: Build Solution
-        run: msbuild UmaSimulator.sln /p:Configuration=Release /p:Platform=x64
+      - name: Build UmaAiForm
+        run: msbuild UmaAiForm/UmaAiForm.csproj /p:Configuration=Release
 
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            **/x64/Release/UmaAi.exe
-            **/x64/Release/UmaAiForm.exe
+            **/bin/Release/UmaAiForm.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
